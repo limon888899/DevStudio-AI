@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.DevStudioAI" parent="Theme.Material3.DayNight.NoActionBar" tools:ignore="NewApi">
+    <style name="Theme.DevStudioAI" parent="android:Theme.Material.NoActionBar"" tools:ignore="NewApi">
         <item name="android:statusBarColor">@android:color/black</item>
         <item name="android:navigationBarColor">@android:color/black</item>
     </style>
