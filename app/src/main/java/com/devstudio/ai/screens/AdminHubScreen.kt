@@ -41,11 +41,11 @@ fun DeploymentsScreen(navController: NavController) {
             Text("Deployments & APK Builder", color = Color.White, fontSize = 26.sp, fontWeight = FontWeight.Bold)
 
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Button(onClick = { /* Vercel deployment */ }, colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)) {
-                    Text("Vercel Deploy")
+                Button(onClick = { }, colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)) {
+                    Text("Vercel")
                 }
-                Button(onClick = { /* APK build */ }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
-                    Text("Build Native APK")
+                Button(onClick = { }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
+                    Text("APK Builder")
                 }
             }
 
@@ -55,9 +55,9 @@ fun DeploymentsScreen(navController: NavController) {
                 shape = RoundedCornerShape(18.dp)
             ) {
                 Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                    Text("Live Deployments", color = Color.White, fontWeight = FontWeight.Bold)
-                    Text("studio-app.vercel.app", color = MutedText)
-                    Text("custom-domain: app.devstudio.ai", color = MutedText)
+                    Text("studio-app.vercel.app", color = Color.White, fontWeight = FontWeight.Bold)
+                    Text("Custom domain: app.devstudio.ai", color = MutedText)
+                    Text("Realtime build logs", color = MutedText)
                     LinearProgressIndicator(
                         progress = { 0.74f },
                         modifier = Modifier.fillMaxWidth().height(8.dp),
@@ -71,13 +71,13 @@ fun DeploymentsScreen(navController: NavController) {
                 colors = CardDefaults.cardColors(containerColor = SurfaceCard),
                 shape = RoundedCornerShape(18.dp)
             ) {
-                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text("APK Build Progress", color = Color.White, fontWeight = FontWeight.Bold)
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Text("Native APK Build", color = Color.White, fontWeight = FontWeight.Bold)
                     Text("Compiling Kotlin sources", color = MutedText)
                     Text("Running Gradle tasks", color = MutedText)
                     Text("Signing APK", color = MutedText)
                     Button(
-                        onClick = { /* install prompt */ },
+                        onClick = { },
                         modifier = Modifier.align(Alignment.End),
                         colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)
                     ) {

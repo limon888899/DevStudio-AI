@@ -26,7 +26,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -51,7 +50,7 @@ fun AssistantScreen(navController: NavController) {
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
             Text("AI Developer Assistant", color = Color.White, fontSize = 26.sp, fontWeight = FontWeight.Bold)
 
@@ -94,13 +93,25 @@ fun AssistantScreen(navController: NavController) {
             )
 
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Button(onClick = { /* voice prompt */ }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
+                Button(onClick = { }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
                     Icon(Icons.Default.Mic, contentDescription = null)
                     Text("Voice")
                 }
-                Button(onClick = { /* generate */ }, colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)) {
+                Button(onClick = { }, colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)) {
                     Icon(Icons.Default.Send, contentDescription = null)
                     Text("Generate")
+                }
+            }
+
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = SurfaceCard),
+                shape = RoundedCornerShape(18.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    Text("Debugger", color = Color.White, fontWeight = FontWeight.Bold)
+                    Text("Error detected in API response mapping", color = MutedText)
+                    Text("Fix suggestion: resolve payload mismatch in orders schema", color = PrimaryCyan)
                 }
             }
         }
