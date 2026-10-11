@@ -1,6 +1,7 @@
 package com.devstudio.ai.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -240,9 +241,9 @@ private fun FeatureTile(title: String, icon: androidx.compose.ui.graphics.vector
         colors = CardDefaults.cardColors(containerColor = SurfaceCard),
         shape = RoundedCornerShape(16.dp)
     ) {
-        androidx.compose.foundation.clickable { onClick() }
         Row(
             modifier = Modifier
+                .clickable { onClick() }
                 .fillMaxWidth()
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
