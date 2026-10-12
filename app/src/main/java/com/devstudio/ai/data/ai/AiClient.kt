@@ -8,24 +8,39 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 object AiClient {
+    private const val MODEL = "gemini-flash-latest"
+
     suspend fun ask(apiKey: String, prompt: String): String = withContext(Dispatchers.IO) {
-        val conn = URL("https://api.anthropic.com/v1/messages").openConnection() as HttpURLConnection
+        val url = "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateContent"
+        val conn = URL(url).openConnection() as HttpURLConnection
         try {
             conn.requestMethod = "POST"
             conn.connectTimeout = 20000
             conn.readTimeout = 60000
             conn.doOutput = true
             conn.setRequestProperty("content-type", "application/json")
-            conn.setRequestProperty("x-api-key", apiKey)
-            conn.setRequestProperty("anthropic-version", "2023-06-01")
+            conn.setRequestProperty("x-goog-api-key", apiKey)
 
             val body = JSONObject()
-                .put("model", "claude-sonnet-5-5")
-                .put("max_tokens", 2000)
-                .put("system", "You are DevStudio AI, a mobile developer assistant. Be concise and put code in fenced blocks.")
                 .put(
-                    "messages",
-                    JSONArray().put(JSONObject().put("role", "user").put("content", prompt))
+                    "systemInstruction",
+                    JSONObject().put(
+                        "parts",
+                        JSONArray().put(
+                            JSONObject().put(
+                                "text",
+                                "You are DevStudio AI, a mobile developer assistant. Be concise and put code in fenced blocks."
+                            )
+                        )
+                    )
+                )
+                .put(
+                    "contents",
+                    JSONArray().put(
+                        JSONObject()
+                            .put("role", "user")
+                            .put("parts", JSONArray().put(JSONObject().put("text", prompt)))
+                    )
                 )
             conn.outputStream.use { it.write(body.toString().toByteArray(Charsets.UTF_8)) }
 
@@ -42,11 +57,14 @@ object AiClient {
                 throw RuntimeException("API error $code: $msg")
             }
 
-            val content = JSONObject(text).getJSONArray("content")
+            val parts = JSONObject(text)
+                .getJSONArray("candidates")
+                .getJSONObject(0)
+                .getJSONObject("content")
+                .getJSONArray("parts")
             val sb = StringBuilder()
-            for (i in 0 until content.length()) {
-                val block = content.getJSONObject(i)
-                if (block.optString("type") == "text") sb.append(block.optString("text"))
+            for (i in 0 until parts.length()) {
+                sb.append(parts.getJSONObject(i).optString("text"))
             }
             sb.toString()
         } finally {
