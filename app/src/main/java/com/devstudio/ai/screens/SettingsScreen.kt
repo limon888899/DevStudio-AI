@@ -18,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -29,6 +30,7 @@ import com.devstudio.ai.ui.theme.SurfaceCard
 
 @Composable
 fun AdminHubScreen(navController: NavController) {
+    val uriHandler = LocalUriHandler.current
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -39,13 +41,13 @@ fun AdminHubScreen(navController: NavController) {
             Text("Unified Admin Hub", color = Color.White, fontSize = 26.sp, fontWeight = FontWeight.Bold)
 
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Button(onClick = { }, colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)) {
+                Button(onClick = { uriHandler.openUri("https://console.firebase.google.com") }, colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)) {
                     Text("Firebase")
                 }
-                Button(onClick = { }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
+                Button(onClick = { uriHandler.openUri("https://supabase.com/dashboard") }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
                     Text("Supabase")
                 }
-                Button(onClick = { }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
+                Button(onClick = { uriHandler.openUri("https://strapi.io") }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
                     Text("Strapi")
                 }
             }
@@ -61,7 +63,7 @@ fun AdminHubScreen(navController: NavController) {
                     Text("Supabase Dashboard", color = MutedText)
                     Text("Strapi CMS", color = MutedText)
                     Text("Custom Admin URL", color = MutedText)
-                    Text("In-app WebView secure access enabled", color = PrimaryCyan, fontSize = 14.sp)
+                    Text("Tap a button above to open the dashboard", color = PrimaryCyan, fontSize = 14.sp)
                 }
             }
         }
