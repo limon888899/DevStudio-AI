@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,6 +32,7 @@ import com.devstudio.ai.ui.theme.SurfaceCard
 
 @Composable
 fun DeploymentsScreen(navController: NavController) {
+    val uriHandler = LocalUriHandler.current
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -41,10 +43,10 @@ fun DeploymentsScreen(navController: NavController) {
             Text("Deployments & APK Builder", color = Color.White, fontSize = 26.sp, fontWeight = FontWeight.Bold)
 
             Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                Button(onClick = { }, colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)) {
+                Button(onClick = { uriHandler.openUri("https://vercel.com/dashboard") }, colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)) {
                     Text("Vercel")
                 }
-                Button(onClick = { }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
+                Button(onClick = { uriHandler.openUri("https://github.com/limon888899/DevStudio-AI/actions") }, colors = ButtonDefaults.buttonColors(containerColor = SurfaceCard)) {
                     Text("APK Builder")
                 }
             }
@@ -77,7 +79,7 @@ fun DeploymentsScreen(navController: NavController) {
                     Text("Running Gradle tasks", color = MutedText)
                     Text("Signing APK", color = MutedText)
                     Button(
-                        onClick = { },
+                        onClick = { uriHandler.openUri("https://github.com/limon888899/DevStudio-AI/actions") },
                         modifier = Modifier.align(Alignment.End),
                         colors = ButtonDefaults.buttonColors(containerColor = PrimaryCyan)
                     ) {
